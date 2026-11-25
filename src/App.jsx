@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 import ShopPage from './pages/ShopPage'
 import AdminPage from './pages/AdminPage'
@@ -13,19 +14,22 @@ function ProtectedAdminRoute({ children }) {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<ShopPage />} />
-      <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route
-        path="/admin"
-        element={
-          <ProtectedAdminRoute>
-            <AdminPage />
-          </ProtectedAdminRoute>
-        }
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<ShopPage />} />
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Analytics />
+    </>
   )
 }
 
